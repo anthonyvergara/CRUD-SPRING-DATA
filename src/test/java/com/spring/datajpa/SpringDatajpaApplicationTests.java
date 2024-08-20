@@ -25,13 +25,29 @@ class SpringDatajpaApplicationTests{
 		
 	}
 	
+	
 	public void salvar() {
 		EstudosModel objeto = new EstudosModel();
-		objeto.setLogin("Harry");
-		objeto.setSenha("monster");
-		objeto.setEmail("harry@gmail.com");
-		objeto.setIdade(10);
+		objeto.setNome("Estella");
+		objeto.setLogin("estelinha");
+		objeto.setSenha("flor");
+		objeto.setEmail("estella@gmail.com");
+		objeto.setIdade(3);
+		EstudosModel objeto2 = new EstudosModel();
+		objeto2.setNome("Olivia");
+		objeto2.setLogin("vixiolivia");
+		objeto2.setSenha("luz");
+		objeto2.setEmail("estella@gmail.com");
+		objeto2.setIdade(1);
+		EstudosModel objeto3 = new EstudosModel();
+		objeto3.setNome("Anthony Vergara");
+		objeto3.setLogin("anthonyadm");
+		objeto3.setSenha("adm");
+		objeto3.setEmail("adm@gmail.com");
+		objeto3.setIdade(27);
 		estudosRepository.save(objeto);
+		estudosRepository.save(objeto2);
+		estudosRepository.save(objeto3);
 	}
 	
 	@Test
@@ -43,14 +59,27 @@ class SpringDatajpaApplicationTests{
 	}
 	
 	@Test
+	public void consultarNome() {
+		List<EstudosModel> estudosModel = estudosRepository.listName("Anthony");
+		for (EstudosModel nomes : estudosModel) {
+			System.out.println(nomes.getNome());
+		}
+	}
+	
+	
 	public void update() {
 		Optional<EstudosModel> estudosModel = estudosRepository.findById(1L);
 		EstudosModel pessoa = estudosModel.get();
-		pessoa.setSenha("labiosdemel");
+		pessoa.setNome("Jennifer");
+		
+		Optional<EstudosModel> estudosModel2 = estudosRepository.findById(2L);
+		EstudosModel pessoa2 = estudosModel2.get();
+		pessoa2.setNome("Anthony");
 		estudosRepository.save(pessoa);
+		estudosRepository.save(pessoa2);
 	}
 	
-	@Test
+	
 	public void delete() {
 		Optional<EstudosModel> estudosModel = estudosRepository.findById(152L);
 		estudosRepository.delete(estudosModel.get());
