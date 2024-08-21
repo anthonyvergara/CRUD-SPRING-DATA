@@ -25,29 +25,34 @@ class SpringDatajpaApplicationTests{
 		
 	}
 	
-	
+	@Test
 	public void salvar() {
 		EstudosModel objeto = new EstudosModel();
-		objeto.setNome("Estella");
-		objeto.setLogin("estelinha");
+		objeto.setNome("Alpha");
+		objeto.setLogin("ALphinha");
 		objeto.setSenha("flor");
 		objeto.setEmail("estella@gmail.com");
 		objeto.setIdade(3);
 		EstudosModel objeto2 = new EstudosModel();
-		objeto2.setNome("Olivia");
-		objeto2.setLogin("vixiolivia");
+		objeto2.setNome("Beta");
+		objeto2.setLogin("alphinha");
 		objeto2.setSenha("luz");
 		objeto2.setEmail("estella@gmail.com");
 		objeto2.setIdade(1);
 		EstudosModel objeto3 = new EstudosModel();
-		objeto3.setNome("Anthony Vergara");
-		objeto3.setLogin("anthonyadm");
+		objeto3.setNome("Alpha Beta");
+		objeto3.setLogin("alphinha");
 		objeto3.setSenha("adm");
 		objeto3.setEmail("adm@gmail.com");
 		objeto3.setIdade(27);
 		estudosRepository.save(objeto);
 		estudosRepository.save(objeto2);
 		estudosRepository.save(objeto3);
+	}
+	
+	@Test
+	public void deletarName() {
+		estudosRepository.deleteByNameAge("Alpha Beta", 27);
 	}
 	
 	@Test
@@ -60,13 +65,23 @@ class SpringDatajpaApplicationTests{
 	
 	@Test
 	public void consultarNome() {
-		List<EstudosModel> estudosModel = estudosRepository.listName("Anthony");
+		List<EstudosModel> estudosModel = estudosRepository.listName("Anthony",27);
 		for (EstudosModel nomes : estudosModel) {
 			System.out.println(nomes.getNome());
 		}
+		
+		List<EstudosModel> estudos = estudosRepository.listName("Jennifer");
+		for(EstudosModel pessoa : estudos) {
+			System.out.println("Nome: "+pessoa.getNome());
+		}
 	}
 	
+	@Test
+	public void atualizarEmail() {
+		estudosRepository.updateEmail("olivia@gmail.com", 303L);
+	}
 	
+	@Test
 	public void update() {
 		Optional<EstudosModel> estudosModel = estudosRepository.findById(1L);
 		EstudosModel pessoa = estudosModel.get();
@@ -79,7 +94,7 @@ class SpringDatajpaApplicationTests{
 		estudosRepository.save(pessoa2);
 	}
 	
-	
+	@Test
 	public void delete() {
 		Optional<EstudosModel> estudosModel = estudosRepository.findById(152L);
 		estudosRepository.delete(estudosModel.get());
