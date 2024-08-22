@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.spring.datajpa.model.EstudosModel;
+import com.spring.datajpa.model.Telefone;
 import com.spring.datajpa.repository.EstudosRepository;
+import com.spring.datajpa.repository.TelefoneRepository;
 import com.spring.datajpa.service.GenericService;
 
 @SpringBootTest
@@ -17,6 +19,9 @@ class SpringDatajpaApplicationTests{
 	
 	@Autowired
 	private EstudosRepository estudosRepository;
+	
+	@Autowired
+	private TelefoneRepository telefoneRepository;
 	
 	
 	@Test
@@ -59,7 +64,12 @@ class SpringDatajpaApplicationTests{
 	public void consultar() {
 		Optional<EstudosModel> estudosModel = estudosRepository.findById(1L);
 		
-		System.out.println("Login: "+estudosModel.get().getLogin());
+		for(Telefone telefones : estudosModel.get().getTelefone() ) {
+			System.out.println(telefones.getTipo());
+			System.out.println(telefones.getNumero());
+			System.out.println(telefones.getEstudosModel().getNome());
+			System.out.println(estudosModel.get().getLogin());
+		}
 		
 	}
 	
@@ -74,6 +84,22 @@ class SpringDatajpaApplicationTests{
 		for(EstudosModel pessoa : estudos) {
 			System.out.println("Nome: "+pessoa.getNome());
 		}
+	}
+	
+	@Test
+	public void insertTelephone() {
+		
+		Optional<EstudosModel> estudosModel = estudosRepository.findById(2L);
+		
+		Telefone telefone = new Telefone();
+		
+		telefone.setTipo("Mobile");
+		telefone.setNumero(62995256017L);
+		telefone.setEstudosModel(estudosModel.get());
+		
+		telefoneRepository.save(telefone);
+		
+		
 	}
 	
 	@Test

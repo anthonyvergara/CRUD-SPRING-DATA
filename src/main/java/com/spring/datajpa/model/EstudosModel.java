@@ -1,9 +1,13 @@
 package com.spring.datajpa.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class EstudosModel {
@@ -20,7 +24,20 @@ public class EstudosModel {
 	
 	private String email;
 	
+	@OneToMany(mappedBy = "estudosModel", orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<Telefone> telefone;
+	
 	private int idade;
+	
+	
+
+	public List<Telefone> getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(List<Telefone> telefone) {
+		this.telefone = telefone;
+	}
 
 	public Long getId() {
 		return id;
