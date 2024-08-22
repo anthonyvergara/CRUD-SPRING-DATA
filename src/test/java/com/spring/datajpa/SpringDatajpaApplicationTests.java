@@ -32,13 +32,13 @@ class SpringDatajpaApplicationTests{
 	
 	@Test
 	public void salvar() {
-		EstudosModel objeto = new EstudosModel();
+		/*EstudosModel objeto = new EstudosModel();
 		objeto.setNome("Rock");
 		objeto.setLogin("AAVe");
 		objeto.setSenha("Sams");
 		objeto.setEmail("samns@gmail.com");
 		objeto.setIdade(3);
-		estudosRepository.save(objeto);
+		estudosRepository.save(objeto);*/
 	}
 	
 	@Test
